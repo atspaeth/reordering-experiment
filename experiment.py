@@ -15,7 +15,7 @@ class Experiment:
         self.reset()
 
     def reset(self):
-        self.state = np.arange(1, self.n_items + 1, dtype=np.float64)
+        self.state = np.arange(1, self.n_items + 1, dtype=np.float32)
         ret = self.t
         self.t = 0
         return ret
@@ -33,7 +33,7 @@ class Experiment:
         else:
             self.state[i] = (self.state[j - 1] + self.state[j]) / 2
         # Make sure the state is still ordered.
-        self.state = sorted(self.state, key=lambda x: x)
+        self.state.sort()
         self.t += 1
         return self.required_precision()
 

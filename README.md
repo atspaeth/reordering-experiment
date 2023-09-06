@@ -16,3 +16,17 @@ reasonable approximation to actual user behavior given that the items will
 originally be in an effectively random order and the users will want to
 reorder them in some meaningful way. This test script runs Monte Carlo
 experiments to try to figure that out.
+
+# Results
+
+Over 1000 runs of random reorderings of the items, the minimum number of
+iterations to lose precision for a double-valued column is about 2000,
+suggesting there's little reason to worry about this in practice. Even if
+the colummn is only single-precision floating point, the minimum time to
+failure over 1000 iterations is in the hundreds. 
+
+Also, I don't have data to support this, but it seems to happen even later
+for smaller numbers of items. Since 1000 is unrealistically many for our use
+case (usually there will be more like 10), I expect this issue to crop up
+extremely rarely, and I'm content to implement the naive version of this,
+label it a "quirk" in the bug tracker, and move on.
